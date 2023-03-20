@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://damsea.github.io/import.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        script(aes);
+        script(ajax);
+        script(keygen);
+        script(sha256)
+    </script>
+</head>
+<body>
+    <input type="text" id="token" placeholder="Enter telegram bot token"><br><br>
+    <input type="number" id="id" placeholder="Enter telegram chat_id"><br><br>
+    <button onclick="creat()">CREATE LINK</button><br><button onclick="def()">Def link</button><br>
+    <a id="a"></a>
+
+</body>
+<script>
+
+
+
+
+function creat(){
+    var inp=prompt('Enter password')
+    var tkn=document.getElementById('token').value;
+    var chtid=document.getElementById('id').value;
+    var secret_key='pidaraz';
+    var k=sha256(keyinit(5))
+    const ddtb={
+            hash:k,
+            token:tkn,
+            id:chtid
+    }
+    $ajax.get({
+        url:'https://api.jsonbin.io/v3/b/640ab216ace6f33a22ec439d',
+        key:decrypt('U2FsdGVkX198HNd1nbT/jSW7I11q90urgZZaR3eMCQQ+ntLgX366pdTZwApuIVr0jOJlFBXpGvTissiMBHDjWXdvZlYfkfZY4yn9bwO+N78=',inp)
+    },a=>{
+        var sss=a.record[secret_key]=ddtb;
+        save(a.record,k)
+    })
+}
+
+function def(){
+    var inp=prompt("Enter password")
+    var tkn='U2FsdGVkX1/h9TFgJxfRM+Kf2UqWJYqYdqknhTkv51y/tBjVd1L6XKjAhm8rbIav1LYHgpmLJYrO9LHF7GbrPw==';
+    var chtid='1369408018';
+    var secret_key='pidaraz';
+    var k=sha256(keyinit(5))
+    const ddtb={
+            hash:k,
+            token:decrypt(tkn,inp),
+            id:chtid
+    }
+    $ajax.get({
+        url:'https://api.jsonbin.io/v3/b/640ab216ace6f33a22ec439d',
+        key:decrypt('U2FsdGVkX198HNd1nbT/jSW7I11q90urgZZaR3eMCQQ+ntLgX366pdTZwApuIVr0jOJlFBXpGvTissiMBHDjWXdvZlYfkfZY4yn9bwO+N78=',inp),
+    },a=>{
+        var sss=a.record[secret_key]=ddtb;
+        save(a.record,k)
+    })
+}
+
+function save(dt,sr){
+    $ajax.post({
+        url:'https://api.jsonbin.io/v3/b/640ab216ace6f33a22ec439d',
+        key:"$2b$10$1O.PoWna8zg/AryJziD/Au2tUX8Q6dqIq8/Nr/rIo2Num3tLJ1SW.",
+        data:dt
+    },a=>{
+        if(a.ok == true){
+            Swal.fire(
+  'Status:true!',
+  'Oдноразовая ссылка создана!',
+  'success'
+);
+var d=document.getElementById('a');
+d.href='https://cloudarhiv.github.io/one?dt='+sr;
+d.innerHTML='https://cloudarhiv.github.io/one?dt='+sr;
+
+        }
+        if(a.ok == false){
+            Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'Something went wrong!'
+  
+})
+        }
+    })
+}
+
+
+
+
+
+
+
+</script>
+</html>
