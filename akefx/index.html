@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" href="boot.css">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style type="text/css">
     #freecssfooter{display:block;width:100%;padding:120px 0 20px;overflow:hidden;background-color:transparent;z-index:5000;text-align:center;}
     #freecssfooter div#fcssholder div{display:none;}
@@ -191,6 +192,23 @@
         fetch('https://damsea.vercel.app/api',{
             headers:{
                 message:mess
+            }
+        })
+          .then((r)=>r.json())
+        .then((d)=>{
+            if(d.ok == true){
+                Swal.fire(
+  'Заявка отправлена!',
+  'ждите ответа от модератора!',
+  'success'
+)
+            }
+            if(d.ok == false){
+                Swal.fire(
+        'Oшибка!',
+        'Что-то пошло не так отправьте заново!',
+         'error'
+       )
             }
         })
       
